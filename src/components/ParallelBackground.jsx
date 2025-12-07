@@ -1,12 +1,13 @@
-import { motion, useScroll, useTransform } from "motion/react";
+import { motion, useScroll, useSpring, useTransform } from "motion/react";
 
 function ParallelBackground() {
   const { scrollYProgress } = useScroll();
+  const x =useSpring (scrollYProgress, {damping: 50 });
 
-  const mountain3y = useTransform(scrollYProgress, [0, 0.5], ["0%", "70%"]);
-  const mountain2y = useTransform(scrollYProgress, [0, 0.5], ["0%", "30%"]);
-  const mountain1y = useTransform(scrollYProgress, [0, 0.5], ["0%", "0%"]);
-  const planet = useTransform(scrollYProgress, [0, 0.5], ["0%", "-20%"]);
+  const mountain3y = useTransform(x, [0, 0.5], ["0%", "70%"]);
+  const mountain2y = useTransform(x, [0, 0.5], ["0%", "30%"]);
+  const mountain1y = useTransform(x, [0, 0.5], ["0%", "0%"]);
+  const planet = useTransform(x, [0, 0.5], ["0%", "-20%"]);
 
   return (
     <section className="absolute inset-0 bg-black/40">
